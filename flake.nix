@@ -1,6 +1,5 @@
 {
   inputs = {
-    config.url = "./config";
     nixpkgs.url = "github:NixOS/nixpkgs";
   };
 

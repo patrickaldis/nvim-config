@@ -102,7 +102,6 @@
         nvim-web-devicons
         catppuccin-nvim
         nvim-hlslens
-        noice-nvim
         marks-nvim
         tabby-nvim
         bufferline-nvim
@@ -134,9 +133,9 @@
         fzf-lua
 
         # TREESITTER
-        nvim-treesitter.withAllGrammars
-        nvim-treesitter-context
-        nvim-treesitter-textobjects
+        # nvim-treesitter.withAllGrammars
+        # nvim-treesitter-context
+        # nvim-treesitter-textobjects
 
         # MINI
         mini-nvim

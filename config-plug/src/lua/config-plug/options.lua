@@ -63,3 +63,5 @@ vim.opt.undodir = {
 
 -- Turn off search highlight
 vim.keymap.set("n", "<localleader>/", "<cmd>nohlsearch<CR>")
+
+require("vim._core.ui2").enable({})

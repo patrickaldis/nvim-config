@@ -15,15 +15,10 @@
   in
   {
   packages.${system}.default =
-    pkgs.wrapNeovim pkgs.neovim {
-      configure = {
-        packages.config-plug = {
-          start = [
-            (import ./config-plug pkgs)
-          ];
-          opt = [];
-        };
-      };
+    pkgs.wrapNeovimUnstable pkgs.neovim {
+      autoconfigure = true;
+      autowrapRuntimeDeps = true;
+      plugins = [(import ./config-plug pkgs)];
     };
   };
 }

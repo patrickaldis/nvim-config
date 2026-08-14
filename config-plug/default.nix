@@ -82,6 +82,50 @@
       hash = "sha256-s2GL6ddIA9wJI+K/irDtW7xvM/ms8it+04akr3ljJLA=";
     };
   };
+  deps = with pkgs.vimPlugins; [
+
+    # UI
+    which-key-nvim
+
+    lazygit-nvim
+    nvim-tree-lua
+    lualine-nvim
+    nvim-web-devicons
+    catppuccin-nvim
+    nvim-hlslens
+    marks-nvim
+    tabby-nvim
+    bufferline-nvim
+    trouble-nvim
+    workspace-diagnostics
+    minimap-vim
+    quicker-nvim
+    multiple-cursors-nvim
+    log-highlight-nvim
+
+    # EDITOR
+    readline-nvim
+    direnv-nvim
+    teamtype
+    inc-rename-nvim
+    diffview-nvim
+    opencode-nvim
+    render-markdown-nvim
+
+    # COMPLETIONS
+    blink-cmp
+    luasnip
+
+    # LSP
+    nvim-lspconfig
+    typst-preview-nvim
+
+    # FZF
+    fzf-lua
+
+    # MINI
+    mini-nvim
+  ];
   in
     pkgs.vimUtils.buildVimPlugin {
       pname = "config-plug";
@@ -90,54 +134,6 @@
       src = ./src;
       doCheck = false;
 
-      dependencies = with pkgs.vimPlugins; [
-
-        # UI
-        which-key-nvim
-
-        # neogit
-        lazygit-nvim
-        nvim-tree-lua
-        lualine-nvim
-        nvim-web-devicons
-        catppuccin-nvim
-        nvim-hlslens
-        marks-nvim
-        tabby-nvim
-        bufferline-nvim
-        trouble-nvim
-        workspace-diagnostics
-        minimap-vim
-        quicker-nvim
-        multiple-cursors-nvim
-        log-highlight-nvim
-
-        # EDITOR
-        readline-nvim
-        direnv-nvim
-        teamtype
-        inc-rename-nvim
-        diffview-nvim
-        opencode-nvim
-        render-markdown-nvim
-
-        # COMPLETIONS
-        blink-cmp
-        luasnip
-
-        # LSP
-        nvim-lspconfig
-        typst-preview-nvim
-
-        # FZF
-        fzf-lua
-
-        # TREESITTER
-        # nvim-treesitter.withAllGrammars
-        # nvim-treesitter-context
-        # nvim-treesitter-textobjects
-
-        # MINI
-        mini-nvim
-      ];
+      dependencies = deps;
+      runtimeDeps = pkgs.lib.concatMap (p: p.runtimeDeps or []) deps;
     }

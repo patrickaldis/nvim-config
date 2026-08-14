@@ -130,8 +130,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
               end
             end
 
-            contents = vim.lsp.util.trim_empty_lines(contents)
-
             if vim.tbl_isempty(contents) then
               return
             end
@@ -142,7 +140,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
             text = text:gsub("[ \t\r\n]+%* %* %*[ \t\r\n]+", "\n---\n")
 
             contents = vim.split(text, "\n", { plain = true })
-            contents = vim.lsp.util.trim_empty_lines(contents)
 
             if vim.tbl_isempty(contents) then
               return

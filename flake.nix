@@ -14,11 +14,14 @@
     };
   in
   {
-  packages.${system}.default =
-    pkgs.wrapNeovimUnstable pkgs.neovim {
-      autoconfigure = true;
-      autowrapRuntimeDeps = true;
-      plugins = [(import ./config-plug pkgs)];
+    packages.${system}.default =
+      pkgs.wrapNeovimUnstable pkgs.neovim {
+        autoconfigure = true;
+        autowrapRuntimeDeps = true;
+        plugins = [(import ./config-plug pkgs)];
+      };
+    devShells.${system}.default = pkgs.mkShell {
+      buildInputs = [pkgs.lua-language-server];
     };
   };
 }

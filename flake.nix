@@ -2,6 +2,7 @@
   inputs = {
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    blink-pairs.url = "github:saghen/blink.pairs";
   };
 
   outputs = inputs : let
@@ -10,6 +11,9 @@
       inherit system;
       overlays = [
         inputs.neovim-nightly.overlays.default
+        (final: prev: {
+            vimPlugins = prev.vimPlugins // {blink-pairs = inputs.blink-pairs.packages.${system}.default;};
+        })
       ];
     };
   in

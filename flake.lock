@@ -1,5 +1,45 @@
 {
   "nodes": {
+    "blink-lib": {
+      "inputs": {
+        "nixpkgs": [
+          "blink-pairs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780479614,
+        "narHash": "sha256-YlvnmeKny7pGL5+tAqtZK84WxJ/vKwCMG5CP9xJEnUg=",
+        "owner": "saghen",
+        "repo": "blink.lib",
+        "rev": "b127d48bf8e9ac9cf41f6e0fbead317503f76558",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saghen",
+        "repo": "blink.lib",
+        "type": "github"
+      }
+    },
+    "blink-pairs": {
+      "inputs": {
+        "blink-lib": "blink-lib",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1783888837,
+        "narHash": "sha256-BfkI6Q4TynkboKei8EVB+56041rQIlBUD57LXIKYa+4=",
+        "owner": "saghen",
+        "repo": "blink.pairs",
+        "rev": "dd57684daf1297e854e46c85511e7875efb4de75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saghen",
+        "repo": "blink.pairs",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -25,7 +65,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "neovim-src": "neovim-src",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1786665931,
@@ -59,6 +99,19 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1780749050,
+        "narHash": "sha256-G5B1h4sOH4DN/RZ85xYi6zPm2MHdOrNMeUmMslZ28Qs=",
+        "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1011622.a799d3e3886d/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1786534138,
         "narHash": "sha256-fBJMdnKUTUDtfi/BYLr71HLaC9dG382arxLF2Egg2uo=",
         "owner": "NixOS",
@@ -73,7 +126,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1786535285,
         "narHash": "sha256-rG5HKMAgAhMgydvKGtco6rqTxRq4EDZQCx9USLvVqYw=",
@@ -91,8 +144,9 @@
     },
     "root": {
       "inputs": {
+        "blink-pairs": "blink-pairs",
         "neovim-nightly": "neovim-nightly",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       }
     }
   },

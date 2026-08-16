@@ -1216,3 +1216,5 @@ wk.add({
 })
 require('mini.icons').setup()               -- minimal icons
 -- }}}
+
+require("blink.pairs").setup()

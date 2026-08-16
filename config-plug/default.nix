@@ -114,6 +114,7 @@
 
     # COMPLETIONS
     blink-cmp
+    blink-pairs
     luasnip
 
     # LSP

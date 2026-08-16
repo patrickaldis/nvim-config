@@ -179,7 +179,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         buffer = ev.buf,
         callback = function()
           -- On Neovim 0.10+, refresh() defaults to *all buffers* unless you pass bufnr
-          vim.lsp.codelens.refresh({ bufnr = ev.buf })
+          vim.lsp.codelens.enable(true,{ bufnr = ev.buf })
         end,
       })
     end

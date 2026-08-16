@@ -120,6 +120,9 @@
     nvim-lspconfig
     typst-preview-nvim
 
+    # TREESITTER
+    nvim-treesitter.withAllGrammars
+
     # FZF
     fzf-lua
 

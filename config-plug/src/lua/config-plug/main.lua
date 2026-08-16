@@ -172,7 +172,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
     require("workspace-diagnostics").populate_workspace_diagnostics(client, ev.buf)
-    if client.supports_method("textDocument/codeLens") then
+    if client:supports_method("textDocument/codeLens") then
       local group = vim.api.nvim_create_augroup("HlsCodeLens:" .. ev.buf, { clear = true })
       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
         group = group,

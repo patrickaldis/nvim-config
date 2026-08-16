@@ -58,8 +58,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "artemave";
       repo = "workspace-diagnostics.nvim";
-      rev = "60f9175b2501ae3f8b1aba9719c0df8827610c8e";
-      hash = "sha256-jSpKaKnGyip/nzqU52ypWLgoCtvccYN+qb5jzlwAnd4=";
+      rev = "a35321d8401878cc9558e357acfd0da58b582739";
+      hash = "sha256-xVZYcOw+n/6+4aW+7pcngTTQUBbGsO+QjcHXf3GtaFs=";
     };
   };
   multiple-cursors-nvim = pkgs.vimUtils.buildVimPlugin {

@@ -1,4 +1,4 @@
-{pkgs, ...}:
+pkgs: pins:
   let
   # packages
   direnv-nvim = pkgs.vimUtils.buildVimPlugin {
@@ -42,16 +42,6 @@
       hash = "sha256-ShAot7XV5IgXIeb6FDo8Md4Y3KFHzNEaKOM2k7tXvxs=";
     };
   };
-  render-markdown-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "render-markdown-nvim";
-    version = "";
-    src = pkgs.fetchFromGitHub {
-      owner = "MeanderingProgrammer";
-      repo = "render-markdown.nvim";
-      rev = "e3c18ddd27a853f85a6f513a864cf4f2982b9f26";
-      hash = "sha256-7O8V8XDYn4ITF9VfvV1OSkto+piIm/DpwtEe+vJcE2g=";
-    };
-  };
   workspace-diagnostics = pkgs.vimUtils.buildVimPlugin {
     pname = "workspace-diagnostics";
     version = "";
@@ -60,26 +50,6 @@
       repo = "workspace-diagnostics.nvim";
       rev = "a35321d8401878cc9558e357acfd0da58b582739";
       hash = "sha256-xVZYcOw+n/6+4aW+7pcngTTQUBbGsO+QjcHXf3GtaFs=";
-    };
-  };
-  multiple-cursors-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "multiple-cursors-nvim";
-    version = "";
-    src = pkgs.fetchFromGitHub {
-      owner = "brenton-leighton";
-      repo = "multiple-cursors.nvim";
-      rev = "8d410c06fad32cc0e3849318e056b308fbaafede";
-      hash = "sha256-LHk+0i2zlgT64jNdIsxrXznOASyc88drnV2m1OP9RFY=";
-    };
-  };
-  log-highlight-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "log-highlight-nvim";
-    version = "";
-    src = pkgs.fetchFromGitHub {
-      owner = "fei6409";
-      repo = "log-highlight.nvim";
-      rev = "ca88628f6dd3b9bb46f9a7401669e24cf7de47a4";
-      hash = "sha256-s2GL6ddIA9wJI+K/irDtW7xvM/ms8it+04akr3ljJLA=";
     };
   };
   deps = with pkgs.vimPlugins; [

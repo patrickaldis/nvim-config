@@ -1,8 +1,20 @@
 {
   inputs = {
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     blink-pairs.url = "github:saghen/blink.pairs";
+    multiple-cursors-nvim = {
+        url = "github:brenton-leighton/multiple-cursors.nvim";
+        flake = false;
+    };
+    render-markdown-nvim = {
+        url = "github:MeanderingProgrammer/render-markdown.nvim";
+        flake = false;
+    };
+    log-highlight-nvim = {
+        url = "github:fei6409/log-highlight.nvim";
+        flake = false;
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 
   outputs = inputs : let
@@ -11,9 +23,7 @@
       inherit system;
       overlays = [
         inputs.neovim-nightly.overlays.default
-        (final: prev: {
-            vimPlugins = prev.vimPlugins // {blink-pairs = inputs.blink-pairs.packages.${system}.default;};
-        })
+        (import ./overlay.nix system inputs)
       ];
     };
   in

@@ -113,76 +113,17 @@ vim.opt.updatetime = 200
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
-    wk.add({
-      {
-        "<leader>k",
-        function()
-          local bufnr = vim.api.nvim_get_current_buf()
-          local params = vim.lsp.util.make_position_params(0, "utf-16")
-
-          vim.lsp.buf_request_all(bufnr, "textDocument/hover", params, function(results)
-            local contents = {}
-
-            for _, res in pairs(results) do
-              if res.result and res.result.contents then
-                local lines = vim.lsp.util.convert_input_to_markdown_lines(res.result.contents)
-                vim.list_extend(contents, lines)
-              end
-            end
-
-            if vim.tbl_isempty(contents) then
-              return
-            end
-
-            local text = table.concat(contents, "\n")
-
-            -- Strip custom tags, even if they span multiple lines
-            text = text:gsub("[ \t\r\n]+%* %* %*[ \t\r\n]+", "\n---\n")
-
-            contents = vim.split(text, "\n", { plain = true })
-
-            if vim.tbl_isempty(contents) then
-              return
-            end
-
-            vim.lsp.util.open_floating_preview(contents, "markdown", {
-              border = "rounded",
-              focusable = true,
-              max_width = float_width,
-              max_height = 20,
-            })
-          end)
-        end,
-        buffer = ev.buf,
-        desc = "LSP hover"
-      },
-      {
-        "<leader>j",
-        function()
-          vim.diagnostic.open_float { max_width = float_width, scope = 'cursor' }
-        end,
-        buffer = ev.buf,
-        desc = "Diagnostic float"
-      },
-    })
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client:supports_method('textDocument/formatting') then
-      wk.add({
-        { '<leader>=', function() vim.lsp.buf.format({ bufnr = ev.buf }) end, mode = { 'n', 'v' }, buffer = ev.buf, desc = "Format with LSP" },
-      })
-    end
+    vim.lsp.codelens.enable(true,{ bufnr = ev.buf })
+
     require("workspace-diagnostics").populate_workspace_diagnostics(client, ev.buf)
-    if client:supports_method("textDocument/codeLens") then
-      local group = vim.api.nvim_create_augroup("HlsCodeLens:" .. ev.buf, { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-        group = group,
-        buffer = ev.buf,
-        callback = function()
-          -- On Neovim 0.10+, refresh() defaults to *all buffers* unless you pass bufnr
-          vim.lsp.codelens.enable(true,{ bufnr = ev.buf })
-        end,
-      })
-    end
+
+    wk.add({
+      { "<leader>k", vim.lsp.buf.hover, buffer = ev.buf, desc = "LSP hover" },
+      { "<leader>j", function() vim.diagnostic.open_float { max_width = float_width, scope = 'cursor' } end, buffer = ev.buf, desc = "Diagnostic float" },
+      { '<leader>=', function() vim.lsp.buf.format({ bufnr = ev.buf }) end, mode = { 'n', 'v' }, buffer = ev.buf, desc = "Format with LSP" },
+    })
+
   end,
 })
 

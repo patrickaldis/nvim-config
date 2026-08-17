@@ -1,6 +1,10 @@
 pkgs:
-  let
-  extraRuntimeDeps = with pkgs; [nixd lua-language-server];
+let
+  extraRuntimeDeps = with pkgs; [
+    nixd
+    nixfmt
+    lua-language-server
+  ];
   deps = with pkgs.vimPlugins; [
 
     # UI
@@ -49,14 +53,14 @@ pkgs:
     # MINI
     mini-nvim
   ];
-  in
-    pkgs.vimUtils.buildVimPlugin {
-      pname = "config-plug";
-      version = "0.1.0";
+in
+pkgs.vimUtils.buildVimPlugin {
+  pname = "config-plug";
+  version = "0.1.0";
 
-      src = ./src;
-      doCheck = false;
+  src = ./src;
+  doCheck = false;
 
-      dependencies = deps;
-      runtimeDeps = extraRuntimeDeps ++ pkgs.lib.concatMap (p: p.runtimeDeps or []) deps;
-    }
+  dependencies = deps;
+  runtimeDeps = extraRuntimeDeps ++ pkgs.lib.concatMap (p: p.runtimeDeps or [ ]) deps;
+}

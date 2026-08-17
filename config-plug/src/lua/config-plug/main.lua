@@ -1089,6 +1089,8 @@ require('typst-preview').setup({})
 -- Loaded ~~ fzf-lua ~~ [config] {{{
 local fzf = require('fzf-lua')
 
+fzf.register_ui_select()
+
 wk.add({
   mode = { "n", "v" },
   { "<leader>f",  fzf.files,     desc = "Find file" },

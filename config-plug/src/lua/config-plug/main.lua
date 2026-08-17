@@ -114,16 +114,15 @@ vim.opt.updatetime = 200
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    vim.lsp.codelens.enable(true,{ bufnr = ev.buf })
+    vim.lsp.codelens.enable(true, { bufnr = ev.buf })
 
     require("workspace-diagnostics").populate_workspace_diagnostics(client, ev.buf)
 
     wk.add({
-      { "<leader>k", vim.lsp.buf.hover, buffer = ev.buf, desc = "LSP hover" },
-      { "<leader>j", function() vim.diagnostic.open_float { max_width = float_width, scope = 'cursor' } end, buffer = ev.buf, desc = "Diagnostic float" },
-      { '<leader>=', function() vim.lsp.buf.format({ bufnr = ev.buf }) end, mode = { 'n', 'v' }, buffer = ev.buf, desc = "Format with LSP" },
+      { "<leader>k", vim.lsp.buf.hover,                                                                      buffer = ev.buf,     desc = "LSP hover" },
+      { "<leader>j", function() vim.diagnostic.open_float { max_width = float_width, scope = 'cursor' } end, buffer = ev.buf,     desc = "Diagnostic float" },
+      { '<leader>=', function() vim.lsp.buf.format({ bufnr = ev.buf }) end,                                  mode = { 'n', 'v' }, buffer = ev.buf,          desc = "Format with LSP" },
     })
-
   end,
 })
 
@@ -207,13 +206,21 @@ vim.lsp.config.rust_analyzer = {
   }
 }
 
+vim.lsp.config('zubanls', {
+  name = "ZubanLS",
+  cmd = { "zuban", "server" },
+  root_markers = { "pyproject.toml", ".git" },
+  filetypes = { "python" },
+})
+
 vim.lsp.enable({
   'haskell',
   'nix',
   'lua',
   'rust_analyzer',
   'tinymist',
-  'texlab'
+  'texlab',
+  'zubanls'
 })
 -- }}}
 -- Loaded ~~ which-key.nvim ~~ [no config]
@@ -236,37 +243,37 @@ vim.opt.termguicolors = true
 
 -- empty setup using defaults
 require("nvim-tree").setup {
-    update_focused_file = {enable = true},
-    sync_root_with_cwd = true,
-    disable_netrw = true,
-    renderer = {
-        highlight_git = "name",
-        icons = {
-            show = {
-                git = false
-            }
-        },
-        root_folder_label = ":t:s?$??"
+  update_focused_file = { enable = true },
+  sync_root_with_cwd = true,
+  disable_netrw = true,
+  renderer = {
+    highlight_git = "name",
+    icons = {
+      show = {
+        git = false
+      }
     },
-    diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        show_on_open_dirs = false,
-        severity = {
-            min = vim.diagnostic.severity.WARNING,
-            max = vim.diagnostic.severity.ERROR,
-        },
-        icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
-        },
+    root_folder_label = ":t:s?$??"
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
+    severity = {
+      min = vim.diagnostic.severity.WARNING,
+      max = vim.diagnostic.severity.ERROR,
     },
-    git = {
-        enable = true,
-        show_on_open_dirs = false
-    }
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  git = {
+    enable = true,
+    show_on_open_dirs = false
+  }
 }
 
 local tree = require('nvim-tree.api').tree
@@ -288,67 +295,68 @@ function _G.nvimtree_width()
 
   return 0
 end
+
 -- }}}
 
 -- Loaded ~~ lualine.nvim ~~ [config] {{{
 vim.opt.shortmess:append("S")
 
 require('lualine').setup {
-    options = {
-        ignore_focus = { "NvimTree" },
-        icons_enabled = true,
-        theme = 'auto',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-        disabled_filetypes = {
-            statusline = {},
-            winbar = {},
-        },
-        always_divide_middle = true,
-        always_show_tabline = true,
-        globalstatus = false,
-        refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-            refresh_time = 16, -- ~60fps
-            events = {
-                'WinEnter',
-                'BufEnter',
-                'BufWritePost',
-                'SessionLoadPost',
-                'FileChangedShellPost',
-                'VimResized',
-                'Filetype',
-                'CursorMoved',
-                'CursorMovedI',
-                'ModeChanged',
-            },
-        }
+  options = {
+    ignore_focus = { "NvimTree" },
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
     },
-    sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
-        lualine_c = { 'filename' },
-        lualine_x = {
-            { 'diagnostics',
-                sources = { 'nvim_workspace_diagnostic' }
-            } },
-        lualine_y = { 'filetype' },
-        lualine_z = { 'location' }
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { 'filename' },
-        lualine_x = { 'location' },
-        lualine_y = {},
-        lualine_z = {}
-    },
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
-    extensions = {}
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 16,       -- ~60fps
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
+    }
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch' },
+    lualine_c = { 'filename' },
+    lualine_x = {
+      { 'diagnostics',
+        sources = { 'nvim_workspace_diagnostic' }
+      } },
+    lualine_y = { 'filetype' },
+    lualine_z = { 'location' }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
 }
 -- }}}
 
@@ -565,7 +573,7 @@ vim.cmd.colorscheme("catppuccin-mocha")
 -- }}}
 
 -- Loaded ~~ marks.nvim ~~ [config] {{{
-require'marks'.setup {
+require 'marks'.setup {
   -- whether to map keybinds or not. default true
   default_mappings = false,
   -- which builtin marks to show. default {}
@@ -574,8 +582,8 @@ require'marks'.setup {
   cyclic = true,
   -- whether the shada file is updated after modifying uppercase marks. default false
   force_write_shada = false,
-  -- how often (in ms) to redraw signs/recompute mark positions. 
-  -- higher values will have better performance but may cause visual lag, 
+  -- how often (in ms) to redraw signs/recompute mark positions.
+  -- higher values will have better performance but may cause visual lag,
   -- while lower values may cause performance penalties. default 150.
   refresh_interval = 250,
   -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
@@ -583,7 +591,7 @@ require'marks'.setup {
   -- can be either a table with all/none of the keys, or a single number, in which case
   -- the priority applies to all marks.
   -- default 10.
-  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
   -- disables mark tracking for specific filetypes. default {}
   excluded_filetypes = {},
   -- disables mark tracking for specific buftypes. default {}
@@ -604,27 +612,27 @@ require'marks'.setup {
 -- }}}
 
 -- Loaded ~~ bufferline.nvim ~~ [config] {{{
-require("bufferline").setup{}
+require("bufferline").setup {}
 -- }}}
 
 -- Loaded ~~ trouble.nvim ~~ [config] {{{
-require('trouble').setup{
-  auto_close = false, -- auto close when there are no items
-  auto_open = false, -- auto open when there are items
-  auto_preview = false, -- automatically open preview when on an item
-  auto_refresh = true, -- auto refresh when open
-  auto_jump = false, -- auto jump to the item when there's only one
-  focus = false, -- Focus the window when opened
-  restore = true, -- restores the last location in the list when opening
-  follow = true, -- Follow the current item
-  indent_guides = true, -- show indent guides
-  max_items = 200, -- limit number of items that can be displayed per section
-  multiline = false, -- render multi-line messages
-  pinned = false, -- When pinned, the opened trouble window will be bound to the current buffer
-  warn_no_results = true, -- show a warning when there are no results
+require('trouble').setup {
+  auto_close = false,      -- auto close when there are no items
+  auto_open = false,       -- auto open when there are items
+  auto_preview = false,    -- automatically open preview when on an item
+  auto_refresh = true,     -- auto refresh when open
+  auto_jump = false,       -- auto jump to the item when there's only one
+  focus = false,           -- Focus the window when opened
+  restore = true,          -- restores the last location in the list when opening
+  follow = true,           -- Follow the current item
+  indent_guides = true,    -- show indent guides
+  max_items = 200,         -- limit number of items that can be displayed per section
+  multiline = false,       -- render multi-line messages
+  pinned = false,          -- When pinned, the opened trouble window will be bound to the current buffer
+  warn_no_results = true,  -- show a warning when there are no results
   open_no_results = false, -- open the trouble window when there are no results
   ---@type trouble.Window.opts
-  win = {}, -- window options for the results window. Can be a split or a floating window.
+  win = {},                -- window options for the results window. Can be a split or a floating window.
   -- Window options for the preview window. Can be a split, floating window,
   -- or `main` to show the preview in the main editor window.
   ---@type trouble.Window.opts
@@ -638,10 +646,10 @@ require('trouble').setup{
   -- Throttle/Debounce settings. Should usually not be changed.
   ---@type table<string, number|{ms:number, debounce?:boolean}>
   throttle = {
-    refresh = 20, -- fetches new data when needed
-    update = 10, -- updates the window
-    render = 10, -- renders the window
-    follow = 100, -- follows the current item
+    refresh = 20,                            -- fetches new data when needed
+    update = 10,                             -- updates the window
+    render = 10,                             -- renders the window
+    follow = 100,                            -- follows the current item
     preview = { ms = 100, debounce = true }, -- shows the preview for the current item
   },
   -- Key mappings can be set to the name of a builtin action,
@@ -758,19 +766,19 @@ require('trouble').setup{
   },
   icons = {
     ---@type trouble.Indent.symbols
-    indent = {
-      top           = "│ ",
-      middle        = "├╴",
-      last          = "└╴",
+    indent        = {
+      top         = "│ ",
+      middle      = "├╴",
+      last        = "└╴",
       -- last          = "-╴",
       -- last       = "╰╴", -- rounded
-      fold_open     = " ",
-      fold_closed   = " ",
-      ws            = "  ",
+      fold_open   = " ",
+      fold_closed = " ",
+      ws          = "  ",
     },
-    folder_closed   = " ",
-    folder_open     = " ",
-    kinds = {
+    folder_closed = " ",
+    folder_open   = " ",
+    kinds         = {
       Array         = " ",
       Boolean       = "󰨙 ",
       Class         = " ",
@@ -858,32 +866,32 @@ vim.keymap.set('!', '<C-BS>', readline.backward_kill_word)
 
 -- Loaded ~~ direnv-nvim ~~ [config] {{{
 require("direnv").setup({
-    -- Whether to automatically load direnv when entering a directory with .envrc
-    autoload_direnv = true,
+  -- Whether to automatically load direnv when entering a directory with .envrc
+  autoload_direnv = true,
 
-    -- Statusline integration
-    -- statusline = {
-    --   -- Enable statusline component
-    --   enabled = false,
-    --   -- Icon to display in statusline
-    --   icon = "󱚟",
-    -- },
+  -- Statusline integration
+  -- statusline = {
+  --   -- Enable statusline component
+  --   enabled = false,
+  --   -- Icon to display in statusline
+  --   icon = "󱚟",
+  -- },
 
-    -- Keyboard mappings
-    keybindings = {
-        allow = "<Leader>va",
-        deny = "<Leader>vd",
-        reload = "<Leader>vr",
-        edit = "<Leader>ve",
-    },
+  -- Keyboard mappings
+  keybindings = {
+    allow = "<Leader>va",
+    deny = "<Leader>vd",
+    reload = "<Leader>vr",
+    edit = "<Leader>ve",
+  },
 
-    -- Notification settings
-    notifications = {
-        -- Log level (vim.log.levels.INFO, ERROR, etc.)
-        level = vim.log.levels.INFO,
-        -- Don't show notifications during autoload
-        silent_autoload = false,
-    },
+  -- Notification settings
+  notifications = {
+    -- Log level (vim.log.levels.INFO, ERROR, etc.)
+    level = vim.log.levels.INFO,
+    -- Don't show notifications during autoload
+    silent_autoload = false,
+  },
 })
 -- }}}
 
@@ -892,11 +900,13 @@ require("direnv").setup({
 -- Loaded ~~ inc-rename.nvim ~~ [config] {{{
 require("inc_rename").setup()
 wk.add({
-  { "<leader>r",
+  {
+    "<leader>r",
     function()
       return ":IncRename " .. vim.fn.expand("<cword>")
     end,
-    desc = "Incremental rename" },
+    desc = "Incremental rename"
+  },
 })
 -- }}}
 
@@ -1024,22 +1034,22 @@ fzf.register_ui_select()
 
 wk.add({
   mode = { "n", "v" },
-  { "<leader>f",  fzf.files,     desc = "Find file" },
-  { "<leader>bb", fzf.buffers,   desc = "Buffers" },
-  { "<leader>t",  fzf.builtin,   desc = "Fzf-Lua builtins" },
-  { "<leader>/",  fzf.live_grep, desc = "Project grep" },
-  { "<leader>z",  fzf.zoxide,    desc = "zoxide" },
-  { "<leader>:",  fzf.commands,  desc = "open commands" },
-  { "<leader>sf", fzf.filetypes, desc = "set filetype" },
+  { "<leader>f",  fzf.files,                      desc = "Find file" },
+  { "<leader>bb", fzf.buffers,                    desc = "Buffers" },
+  { "<leader>t",  fzf.builtin,                    desc = "Fzf-Lua builtins" },
+  { "<leader>/",  fzf.live_grep,                  desc = "Project grep" },
+  { "<leader>z",  fzf.zoxide,                     desc = "zoxide" },
+  { "<leader>:",  fzf.commands,                   desc = "open commands" },
+  { "<leader>sf", fzf.filetypes,                  desc = "set filetype" },
   { "<leader>lS", fzf.lsp_live_workspace_symbols, desc = "Workspace Symbols" },
 })
 
 vim.api.nvim_create_autocmd({ 'LspAttach' }, {
   callback = function()
     wk.add({
-      { "<leader>a",  fzf.lsp_code_actions,           desc = "open commands" },
-      { "gd",         fzf.lsp_definitions,            desc = "goto definition" },
-      { "gr",         fzf.lsp_references,             desc = "goto references" }
+      { "<leader>a", fzf.lsp_code_actions, desc = "open commands" },
+      { "gd",        fzf.lsp_definitions,  desc = "goto definition" },
+      { "gr",        fzf.lsp_references,   desc = "goto references" }
     })
   end
 })
@@ -1076,19 +1086,19 @@ vim.api.nvim_create_autocmd({ 'LspAttach' }, {
 -- }}}
 
 -- Loaded ~~ mini.nvim ~~ [config] {{{
-require('mini.bracketed').setup()               -- unimpaired bindings with TS
+require('mini.bracketed').setup() -- unimpaired bindings with TS
 require('mini.diff').setup(
-    {
-        view = {
-            style = 'sign',
-            signs = { add = '▒', change = '▒', delete = '▁' },
-        },
-    }
+  {
+    view = {
+      style = 'sign',
+      signs = { add = '▒', change = '▒', delete = '▁' },
+    },
+  }
 )
 wk.add({
   { '<leader>gd', "<cmd>:lua MiniDiff.toggle_overlay()<cr>", desc = "Toggle Diff Overlay" },
 })
-require('mini.icons').setup()               -- minimal icons
+require('mini.icons').setup() -- minimal icons
 -- }}}
 
 require("blink.pairs").setup()

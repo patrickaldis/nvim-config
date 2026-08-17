@@ -14,6 +14,22 @@
         url = "github:fei6409/log-highlight.nvim";
         flake = false;
     };
+    workspace-diagnostics = {
+        url = "github:artemave/workspace-diagnostics.nvim";
+        flake = false;
+    };
+    opencode-nvim = {
+        url = "github:nickjvandyke/opencode.nvim";
+        flake = false;
+    };
+    readline-nvim = {
+        url = "github:hiberabyss/readline.nvim";
+        flake = false;
+    };
+    direnv-nvim = {
+        url = "github:NotAShelf/direnv.nvim";
+        flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 

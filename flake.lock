@@ -40,6 +40,22 @@
         "type": "github"
       }
     },
+    "direnv-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782680771,
+        "narHash": "sha256-b5PpmkYWaDGLNcu+36tRR5ycATHYBjs9WrV8/jfmooQ=",
+        "owner": "NotAShelf",
+        "repo": "direnv.nvim",
+        "rev": "9258f9f10c4c729d8296fce0e3ecb12543daad06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NotAShelf",
+        "repo": "direnv.nvim",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -174,6 +190,38 @@
         "type": "github"
       }
     },
+    "opencode-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785430120,
+        "narHash": "sha256-bAF3ssHly41AxqKEHFrsK9S1mTbrIZfEI3kzZ6alKXc=",
+        "owner": "nickjvandyke",
+        "repo": "opencode.nvim",
+        "rev": "41622312d5d8fb074699c1d5d96f089286191376",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nickjvandyke",
+        "repo": "opencode.nvim",
+        "type": "github"
+      }
+    },
+    "readline-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702351462,
+        "narHash": "sha256-Ebu8nM8OZXcT36/5/1bBvB/NyzVKYVQh0i55PNYcoSI=",
+        "owner": "hiberabyss",
+        "repo": "readline.nvim",
+        "rev": "bce06a4d8b9761f507e109fad7666ad87bb8bcac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hiberabyss",
+        "repo": "readline.nvim",
+        "type": "github"
+      }
+    },
     "render-markdown-nvim": {
       "flake": false,
       "locked": {
@@ -193,11 +241,31 @@
     "root": {
       "inputs": {
         "blink-pairs": "blink-pairs",
+        "direnv-nvim": "direnv-nvim",
         "log-highlight-nvim": "log-highlight-nvim",
         "multiple-cursors-nvim": "multiple-cursors-nvim",
         "neovim-nightly": "neovim-nightly",
         "nixpkgs": "nixpkgs_3",
-        "render-markdown-nvim": "render-markdown-nvim"
+        "opencode-nvim": "opencode-nvim",
+        "readline-nvim": "readline-nvim",
+        "render-markdown-nvim": "render-markdown-nvim",
+        "workspace-diagnostics": "workspace-diagnostics"
+      }
+    },
+    "workspace-diagnostics": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777903144,
+        "narHash": "sha256-xVZYcOw+n/6+4aW+7pcngTTQUBbGsO+QjcHXf3GtaFs=",
+        "owner": "artemave",
+        "repo": "workspace-diagnostics.nvim",
+        "rev": "a35321d8401878cc9558e357acfd0da58b582739",
+        "type": "github"
+      },
+      "original": {
+        "owner": "artemave",
+        "repo": "workspace-diagnostics.nvim",
+        "type": "github"
       }
     }
   },

@@ -30,6 +30,10 @@
       url = "github:NotAShelf/direnv.nvim";
       flake = false;
     };
+    inc-rename-nvim = {
+      url = "github:smjonas/inc-rename.nvim";
+      flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 

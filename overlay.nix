@@ -1,6 +1,11 @@
 system: inputs: final: prev: {
   vimPlugins = prev.vimPlugins // {
     blink-pairs = inputs.blink-pairs.packages.${system}.default;
+    inc-rename-nvim = prev.vimUtils.buildVimPlugin {
+        pname = "inc-rename-nvim";
+        version = "unstable";
+        src = inputs.inc-rename-nvim;
+    };
     multiple-cursors-nvim = prev.vimUtils.buildVimPlugin {
       pname = "multiple-cursors-nvim";
       version = "unstable";

@@ -77,6 +77,22 @@
         "type": "github"
       }
     },
+    "inc-rename-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785442018,
+        "narHash": "sha256-EWSmklr8kuv/XlOemHxCh9HGjoHdNK1e2s9gkMZvHZU=",
+        "owner": "smjonas",
+        "repo": "inc-rename.nvim",
+        "rev": "ddff8bd3eccedf043bd73f5bf89cf90d2d6d8105",
+        "type": "github"
+      },
+      "original": {
+        "owner": "smjonas",
+        "repo": "inc-rename.nvim",
+        "type": "github"
+      }
+    },
     "log-highlight-nvim": {
       "flake": false,
       "locked": {
@@ -242,6 +258,7 @@
       "inputs": {
         "blink-pairs": "blink-pairs",
         "direnv-nvim": "direnv-nvim",
+        "inc-rename-nvim": "inc-rename-nvim",
         "log-highlight-nvim": "log-highlight-nvim",
         "multiple-cursors-nvim": "multiple-cursors-nvim",
         "neovim-nightly": "neovim-nightly",

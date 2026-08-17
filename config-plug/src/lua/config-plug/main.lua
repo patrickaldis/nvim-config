@@ -892,7 +892,11 @@ require("direnv").setup({
 -- Loaded ~~ inc-rename.nvim ~~ [config] {{{
 require("inc_rename").setup()
 wk.add({
-  { "<leader>r", ":IncRename ", desc = "Incremental rename" },
+  { "<leader>r",
+    function()
+      return ":IncRename " .. vim.fn.expand("<cword>")
+    end,
+    desc = "Incremental rename" },
 })
 -- }}}
 

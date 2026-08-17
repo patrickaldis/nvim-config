@@ -15,13 +15,10 @@ let
     lualine-nvim
     nvim-web-devicons
     catppuccin-nvim
-    nvim-hlslens
     marks-nvim
-    tabby-nvim
     bufferline-nvim
     trouble-nvim
     workspace-diagnostics
-    minimap-vim
     quicker-nvim
     multiple-cursors-nvim
     log-highlight-nvim

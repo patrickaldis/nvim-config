@@ -361,25 +361,6 @@ require('catppuccin').setup({
 vim.cmd.colorscheme("catppuccin-mocha")
 -- }}}
 
--- Loaded ~~ nvim-hlslens ~~ [config] {{{
-require('hlslens').setup()
-
-local kopts = {noremap = true, silent = true}
-
-vim.api.nvim_set_keymap('n', 'n',
-    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', 'N',
-    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-
-vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
--- }}}
-
 -- -- Loaded ~~ noice.nvim ~~ [config] {{{
 -- require("noice").setup({
 --   cmdline = {
@@ -622,58 +603,6 @@ require'marks'.setup {
 }
 -- }}}
 
--- Loaded ~~ tabby.nvim ~~ [config] {{{
-local theme = {
-    fill = 'TabLineFill',
-    -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-    head = 'TabLine',
-    current_tab = 'TabLineSel',
-    tab = 'TabLine',
-    win = 'TabLine',
-    tail = 'TabLine',
-}
-require("tabby").setup({
-    line = function(line)
-        return {
-            {
-                { '  ', hl = theme.head },
-                line.sep('' .. string.rep(" ", nvimtree_width()), theme.head, theme.fill),
-            },
-            line.tabs().foreach(function(tab)
-                local hl = tab.is_current() and theme.current_tab or theme.tab
-                return {
-                    line.sep('', hl, theme.fill),
-                    tab.is_current() and '' or '󰆣',
-                    tab.number(),
-                    tab.name(),
-                    tab.close_btn(''),
-                    line.sep('', hl, theme.fill),
-                    hl = hl,
-                    margin = ' ',
-                }
-            end),
-            line.spacer(),
-            line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-                return {
-                    line.sep('', theme.win, theme.fill),
-                    win.is_current() and '' or '',
-                    win.buf_name(),
-                    line.sep('', theme.win, theme.fill),
-                    hl = theme.win,
-                    margin = ' ',
-                }
-            end),
-            {
-                line.sep('', theme.tail, theme.fill),
-                { '  ', hl = theme.tail },
-            },
-            hl = theme.fill,
-        }
-    end,
-    -- option = {}, -- setup modules' option,
-})
--- }}}
-
 -- Loaded ~~ bufferline.nvim ~~ [config] {{{
 require("bufferline").setup{}
 -- }}}
@@ -888,8 +817,6 @@ require("workspace-diagnostics").setup({
   end
 })
 -- }}}
-
--- Loaded ~~ minimap.vim ~~ [no config]
 
 -- Loaded ~~ quicker.nvim ~~ [config] {{{
 wk.add({

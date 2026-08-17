@@ -1,5 +1,6 @@
 pkgs:
   let
+  extraRuntimeDeps = with pkgs; [nixd lua-language-server];
   deps = with pkgs.vimPlugins; [
 
     # UI
@@ -57,5 +58,5 @@ pkgs:
       doCheck = false;
 
       dependencies = deps;
-      runtimeDeps = pkgs.lib.concatMap (p: p.runtimeDeps or []) deps;
+      runtimeDeps = extraRuntimeDeps ++ pkgs.lib.concatMap (p: p.runtimeDeps or []) deps;
     }

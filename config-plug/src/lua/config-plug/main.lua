@@ -206,6 +206,12 @@ vim.lsp.config.rust_analyzer = {
   }
 }
 
+vim.filetype.add({
+  extension = {
+    daml = "daml"
+  }
+})
+
 vim.lsp.config('zubanls', {
   name = "ZubanLS",
   cmd = { "zuban", "server" },

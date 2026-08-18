@@ -16,7 +16,7 @@ let
     nvim-web-devicons
     catppuccin-nvim
     marks-nvim
-    bufferline-nvim
+    tabby-nvim
     trouble-nvim
     workspace-diagnostics
     quicker-nvim

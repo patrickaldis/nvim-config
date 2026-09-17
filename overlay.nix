@@ -2,9 +2,15 @@ system: inputs: final: prev: {
   vimPlugins = prev.vimPlugins // {
     blink-pairs = inputs.blink-pairs.packages.${system}.default;
     inc-rename-nvim = prev.vimUtils.buildVimPlugin {
-        pname = "inc-rename-nvim";
-        version = "unstable";
-        src = inputs.inc-rename-nvim;
+      pname = "inc-rename-nvim";
+      version = "unstable";
+      src = inputs.inc-rename-nvim;
+    };
+    fzf-lua = prev.vimUtils.buildVimPlugin {
+      pname = "fzf-lua";
+      version = "unstable";
+      src = inputs.fzf-lua;
+      doCheck = false;
     };
     multiple-cursors-nvim = prev.vimUtils.buildVimPlugin {
       pname = "multiple-cursors-nvim";

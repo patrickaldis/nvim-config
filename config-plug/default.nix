@@ -1,6 +1,7 @@
 pkgs:
 let
   extraRuntimeDeps = with pkgs; [
+    fzf
     nixd
     nixfmt
     lua-language-server

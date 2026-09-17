@@ -34,6 +34,10 @@
       url = "github:smjonas/inc-rename.nvim";
       flake = false;
     };
+    fzf-lua = {
+      url = "github:ibhagwan/fzf-lua";
+      flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 

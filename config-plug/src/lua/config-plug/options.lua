@@ -42,24 +42,6 @@ vim.opt.tags = {
   "tags;/",
 }
 
--- Backup directories
-vim.opt.backupdir = {
-  "~/.config/nvim/backups",
-  ".",
-}
-
-vim.opt.directory = {
-  "~/.config/nvim/swaps",
-  ".",
-}
-
--- Undo directory
--- `undodir` exists in modern Neovim, so the exists() check is unnecessary.
-vim.opt.undodir = {
-  "~/.config/nvim/undo",
-  ".",
-}
-
 -- Turn off search highlight
 vim.keymap.set("n", "<localleader>/", "<cmd>nohlsearch<CR>")
 
